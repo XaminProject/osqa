@@ -23,13 +23,15 @@ TEMPLATE_DEBUG = DEBUG
 INTERNAL_IPS = ('127.0.0.1',)
 
 
+# Xamin Notice : Replace following information to what you want
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ask',
         'USER': 'ask',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'PASSWORD': 'YourPassword',
+        'HOST': 'YourHost',
         'PORT': '',
     }
 }
@@ -41,6 +43,7 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 # This should be equal to your domain name, plus the web application context.
 # This shouldn't be followed by a trailing slash.
 # I.e., http://www.yoursite.com or http://www.hostedsite.com/yourhostapp
+# Xamin Notice:	Replace following information to what you want
 APP_URL = 'http://localhost'
 
 #LOCALIZATIONS
@@ -52,6 +55,10 @@ USE_I18N = True
 LANGUAGE_CODE = 'en'
 
 DJANGO_VERSION = 1.3
+
+#Xamin Notice : do NOT change the following variable
+# (C) Xamin Project, 2014
+
 OSQA_DEFAULT_SKIN = 'xamin'
 
 DISABLED_MODULES = ['books',  'project_badges']
