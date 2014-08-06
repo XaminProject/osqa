@@ -2,7 +2,7 @@ import startup
 
 import os.path
 from forum import settings
-from django.conf.urls import patterns, url, include
+from django.conf.urls.defaults import *
 from django.conf import settings as djsettings
 from django.contrib import admin
 from forum import views as app
@@ -18,6 +18,11 @@ sitemaps = {
 
 APP_PATH = os.path.dirname(__file__)
 
+try:
+    admin_url = url(r'^%s(.*)' % _('nimda/'), admin.site.root)
+except AttributeError:
+    admin_url = url(r'^%s(.*)' % _('nimda/'), admin.site.urls)
+
 # Choose the user urls pattern
 if bool(settings.INCLUDE_ID_IN_USER_URLS.value):
     core_user_urls_prefix = r'^%s(?P<id>\d+)/(?P<slug>.*)'
@@ -25,8 +30,7 @@ else:
     core_user_urls_prefix = r'^%s(?P<slug>.*)'
 
 core_urls = (
-    url(r'^$', app.readers.index, name='index'),
-    url(r'^%s(.*)' % _('nimda/'), admin.site.urls),
+    url(r'^$', app.readers.index, name='index'), admin_url,
                         
     url(r'^sitemap.xml$', 'forum.sitemap.index', {'sitemaps': sitemaps}),
     url(r'^sitemap-(?P<section>.+)-(?P<page>\d+)\.xml$', 'forum.sitemap.sitemap', {'sitemaps': sitemaps}, name="sitemap_section_page"),
@@ -81,7 +85,7 @@ core_urls = (
     url(r'^%s(?P<id>\d+)/' % _('convert_to_question/'), app.writers.convert_to_question,name='convert_to_question'),
     url(r'^%s(?P<id>\d+)/' % _('wikify/'), app.commands.wikify, name='wikify'),
     
-    url(r'^%s(?P<id>\d+)/(?P<slug>[\w-]*)$' % _('question/'), 'django.shortcuts.redirect', {'url': '/questions/%(id)s/%(slug)s'}),
+    url(r'^%s(?P<id>\d+)/(?P<slug>[\w-]*)$' % _('question/'), 'django.views.generic.simple.redirect_to', {'url': '/questions/%(id)s/%(slug)s'}),
     url(r'^%s(?P<id>\d+)/?$' % _('questions/'), app.readers.question, name='question'),
     url(r'^%s(?P<id>\d+)/(?P<slug>.*)/(?P<answer>\d+)$' % _('questions/'), app.readers.question),
     url(r'^%s(?P<id>\d+)/(?P<slug>.*)$' % _('questions/'), app.readers.question, name='question'),
@@ -93,10 +97,8 @@ core_urls = (
     url(r'^%s%s(?P<tag>[^/]+)/$' % (_('mark-tag/'),_('ignored/')), app.commands.mark_tag, kwargs={'reason':'bad','action':'add'}, name='mark_ignored_tag'),     
     url(r'^%s(?P<tag>[^/]+)/$' % _('unmark-tag/'), app.commands.mark_tag, kwargs={'action':'remove'}, name='mark_ignored_tag'),     
     
-    url(r'^%s$' % _('users/'), app.users.users, name='users'),
     # url(r'^%s$' % _('online_users/'), app.users.online_users, name='online_users'),    
     
-    url(r'^%s(?P<id>\d+)/(?P<slug>.*)/%s$' % (_('users/'), _('edit/')), app.users.edit_user, name='edit_user'),
     url(r'^%s(?P<id>\d+)/%s$' % (_('users/'), _('award/')), app.users.award_points, name='user_award_points'),
     url(r'^%s(?P<id>\d+)/%s$' % (_('users/'), _('suspend/')), app.users.suspend, name='user_suspend'),
     url(r'^%s(?P<id>\d+)/%s$' % (_('users/'), _('report/')), app.users.report_user, name='user_report'),
@@ -107,10 +109,14 @@ core_urls = (
     url(r'^%s(?P<id>\d+)/(?P<slug>.*)/%s$' % (_('users/'), _('reputation/')), app.users.user_reputation, name='user_reputation'),
     url(r'^%s(?P<id>\d+)/(?P<slug>.*)/%s$' % (_('users/'), _('votes/')), app.users.user_votes, name='user_votes'),
     url(r'^%s(?P<id>\d+)/(?P<slug>.*)/%s$' % (_('users/'), _('recent/')), app.users.user_recent, name='user_recent'),
+    url(r'^%s(?P<id>\d+)/(?P<slug>.*)/%s$' % (_('users/'), _('edit/')), app.users.edit_user, name='edit_user'),
     url(core_user_urls_prefix % _('users/'), app.users.user_profile, name='user_profile'),
     url(r'^%s$' % _('badges/'), app.meta.badges, name='badges'),
     url(r'^%s(?P<id>\d+)/(?P<slug>[\w-]+)?$' % _('badges/'), app.meta.badge, name='badge'),
     # (r'^admin/doc/' % _('admin/doc'), include('django.contrib.admindocs.urls')),
+
+    url(r'^%s$' % _('users/'), app.users.users, name='users'),
+
     
     url(r'^%s$' % _('upload/'), app.writers.upload, name='upload'),
     url(r'^%s$' % _('search/'), app.readers.search, name='search'),

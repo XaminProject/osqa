@@ -34,9 +34,9 @@ def create_connection():
                           local_hostname=DNS_NAME.get_fqdn())
 
     if bool(settings.EMAIL_USE_TLS):
-        connection.ehlo()
-        connection.starttls()
-        connection.ehlo()
+       connection.ehlo()
+       connection.starttls()
+       connection.ehlo()
 
     if settings.EMAIL_HOST_USER and settings.EMAIL_HOST_PASSWORD:
         connection.login(str(settings.EMAIL_HOST_USER), str(settings.EMAIL_HOST_PASSWORD))
@@ -119,4 +119,4 @@ def create_and_send_mail_messages(messages, sender_data=None, reply_to=None):
         except socket.sslerror:
             connection.close()
     except Exception, e:
-        logging.error('Email sending has failed: %s' % e)
+        logging.error('Email sending sajaaaaaad has failed: %s' % e)

@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<awards>
+    <award>
+        <badge>ValidatedEmail</badge>
+        <user>10</user>
+        <node />
+        <trigger>59</trigger>
+        <action>60</action>
+    </award>
+    <award>
+        <badge>ValidatedEmail</badge>
+        <user>3</user>
+        <node />
+        <trigger>69</trigger>
+        <action>70</action>
+    </award>
+    <award>
+        <badge>ValidatedEmail</badge>
+        <user>6</user>
+        <node />
+        <trigger>149</trigger>
+        <action>150</action>
+    </award>
+    <award>
+        <badge>ValidatedEmail</badge>
+        <user>25</user>
+        <node />
+        <trigger>154</trigger>
+        <action>155</action>
+    </award>
+    <award>
+        <badge>ValidatedEmail</badge>
+        <user>26</user>
+        <node />
+        <trigger>159</trigger>
+        <action>160</action>
+    </award>
+    <award>
+        <badge>Scholar</badge>
+        <user>3</user>
+        <node />
+        <trigger>163</trigger>
+        <action>164</action>
+    </award>
+    <award>
+        <badge>ValidatedEmail</badge>
+        <user>27</user>
+        <node />
+        <trigger>170</trigger>
+        <action>171</action>
+    </award>
+    <award>
+        <badge>ValidatedEmail</badge>
+        <user>28</user>
+        <node />
+        <trigger>185</trigger>
+        <action>186</action>
+    </award>
+    <award>
+        <badge>ValidatedEmail</badge>
+        <user>29</user>
+        <node />
+        <trigger>192</trigger>
+        <action>193</action>
+    </award>
+    <award>
+        <badge>Scholar</badge>
+        <user>12</user>
+        <node />
+        <trigger>200</trigger>
+        <action>201</action>
+    </award>
+    <award>
+        <badge>ValidatedEmail</badge>
+        <user>30</user>
+        <node />
+        <trigger>211</trigger>
+        <action>212</action>
+    </award>
+    <award>
+        <badge>ValidatedEmail</badge>
+        <user>31</user>
+        <node />
+        <trigger>216</trigger>
+        <action>217</action>
+    </award>
+    <award>
+        <badge>ValidatedEmail</badge>
+        <user>33</user>
+        <node />
+        <trigger>232</trigger>
+        <action>233</action>
+    </award>
+</awards>

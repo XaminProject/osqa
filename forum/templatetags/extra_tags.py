@@ -13,12 +13,14 @@ from django.utils import dateformat
 from forum.models import Question, Answer, QuestionRevision, AnswerRevision, NodeRevision
 from django.utils.translation import ugettext as _
 from django.utils.translation import ungettext
+from django.utils import simplejson
 from forum import settings
 from django.template.defaulttags import url as default_url
 from forum import skins
 from forum.utils import html
 from extra_filters import decorated_int
 from django.core.urlresolvers import reverse
+from forum.utils import jDate
 
 register = template.Library()
 
@@ -46,9 +48,6 @@ def gravatar(user, size):
 
 @register.simple_tag
 def get_score_badge(user):
-    return _get_score_badge(user)
-
-def _get_score_badge(user):
     if user.is_suspended():
         return _("(suspended)")
 
@@ -88,13 +87,6 @@ def get_accept_rate(user):
     if not settings.SHOW_USER_ACCEPT_RATE:
         return ""
 
-    # Freeze accept rate for users
-    freeze_accept_rate_for_users_users = settings.FREEZE_ACCEPT_RATE_FOR.value
-    if user.username in list(freeze_accept_rate_for_users_users):
-        freeze = True
-    else:
-        freeze = False
-
     # We get the number of all user's answers.
     total_answers_count = Answer.objects.filter(author=user).count()
 
@@ -116,13 +108,10 @@ def get_accept_rate(user):
         }
     # If the user has one accepted answer we'll be using singular.
     elif accepted_answers_count == 1:
-        accept_rate_number_title = _('%s has one accepted answer') % smart_unicode(user.username)
+        accept_rate_number_title = _('%s has one accepted answer') % user.username
     # This are the only options. Otherwise there are no accepted answers at all.
     else:
-        if freeze:
-            accept_rate_number_title = ""
-        else:
-            accept_rate_number_title = _('%s has no accepted answers') % smart_unicode(user.username)
+        accept_rate_number_title = _('%s has no accepted answers') % smart_unicode(user.username)
 
     html_output = """
     <span title="%(accept_rate_title)s" class="accept_rate">%(accept_rate_label)s:</span>
@@ -130,7 +119,7 @@ def get_accept_rate(user):
     """ % {
         'accept_rate_label' : _('accept rate'),
         'accept_rate_title' : _('Rate of the user\'s accepted answers'),
-        'accept_rate' : 100 if freeze else int(accept_rate),
+        'accept_rate' : int(accept_rate),
         'accept_rate_number_title' : u'%s' % accept_rate_number_title,
     }
 
@@ -149,17 +138,20 @@ def get_age(birthday):
 def diff_date(date, limen=2):
     if not date:
         return _('unknown')
-
+    
     now = datetime.datetime.now()
     diff = now - date
     days = diff.days
     hours = int(diff.seconds/3600)
     minutes = int(diff.seconds/60)
 
+    
     if date.year != now.year:
-        return dateformat.format(date, 'd M \'y, H:i')
+        return jDate.miladi2shamsi(date.month,date.day,date.year)
+        return dateformat.format(date, 'd/m/Y, H:i')
     elif days > 2:
-        return dateformat.format(date, 'd M, H:i')
+        return jDate.miladi2shamsi(date.month,date.day,date.year)
+        return dateformat.format(date, 'd/m/Y, H:i')
 
     elif days == 2:
         return _('2 days ago')

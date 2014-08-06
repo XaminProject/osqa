@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<tags>
+    <tag>
+        <name>test</name>
+        <author>2</author>
+        <used>4</used>
+    </tag>
+    <tag>
+        <name>تست</name>
+        <author>2</author>
+        <used />
+    </tag>
+    <tag>
+        <name>seo</name>
+        <author>7</author>
+        <used />
+    </tag>
+    <tag>
+        <name>other</name>
+        <author>7</author>
+        <used />
+    </tag>
+    <tag>
+        <name>help</name>
+        <author>7</author>
+        <used />
+    </tag>
+    <tag>
+        <name>personal</name>
+        <author>8</author>
+        <used />
+    </tag>
+    <tag>
+        <name>problem</name>
+        <author>8</author>
+        <used />
+    </tag>
+    <tag>
+        <name>downtrend</name>
+        <author>9</author>
+        <used />
+    </tag>
+    <tag>
+        <name>آرچیپل</name>
+        <author>12</author>
+        <used />
+    </tag>
+    <tag>
+        <name>archiple</name>
+        <author>12</author>
+        <used />
+    </tag>
+    <tag>
+        <name>support</name>
+        <author>12</author>
+        <used>1</used>
+    </tag>
+    <tag>
+        <name>installation</name>
+        <author>12</author>
+        <used />
+    </tag>
+    <tag>
+        <name>64bit</name>
+        <author>12</author>
+        <used />
+    </tag>
+    <tag>
+        <name>vt</name>
+        <author>12</author>
+        <used />
+    </tag>
+    <tag>
+        <name>دلالل</name>
+        <author>3</author>
+        <used />
+    </tag>
+    <tag>
+        <name>ding</name>
+        <author>12</author>
+        <used>2</used>
+    </tag>
+    <tag>
+        <name>اپلاینس</name>
+        <author>30</author>
+        <used>1</used>
+    </tag>
+    <tag>
+        <name>appliance</name>
+        <author>30</author>
+        <used>1</used>
+    </tag>
+</tags>

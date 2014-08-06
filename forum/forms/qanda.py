@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 import re
 from datetime import date
 from django import forms
@@ -101,14 +102,20 @@ class TagNamesField(forms.CharField):
 
         list_temp = []
         tagname_re = re.compile(r'^[\w+#\.-]+$', re.UNICODE)
-        for key,tag in list.items():
-            if len(tag) > settings.FORM_MAX_LENGTH_OF_TAG or len(tag) < settings.FORM_MIN_LENGTH_OF_TAG:
+        has_required_tags = False
+	for key,tag in list.items():
+            if tag in (u"زمین-میزبان",u"اپلاینس",u"پشتیبانی",u"عمومی",u"طراحی",u"ترجمه",u"تست-توسعه",u"مستندسازی"):
+                has_required_tags = has_required_tags or True
+	    if len(tag) > settings.FORM_MAX_LENGTH_OF_TAG or len(tag) < settings.FORM_MIN_LENGTH_OF_TAG:
                 raise forms.ValidationError(_('please use between %(min)s and %(max)s characters in you tags') % { 'min': settings.FORM_MIN_LENGTH_OF_TAG, 'max': settings.FORM_MAX_LENGTH_OF_TAG})
             if not tagname_re.match(tag):
                 raise forms.ValidationError(_('please use following characters in tags: letters , numbers, and characters \'.#-_\''))
             # only keep one same tag
             if tag not in list_temp and len(tag.strip()) > 0:
                 list_temp.append(tag)
+
+        if not has_required_tags:
+            raise forms.ValidationError(_('please use include one of following tags: %s') % u"زمین-میزبان','اپلاینس','پشتیبانی','عمومی','طراحی','ترجمه','تست-توسعه','مستندسازی'")
 
         if settings.LIMIT_TAG_CREATION and not self.user.can_create_tags():
             existent = Tag.objects.filter(name__in=list_temp).values_list('name', flat=True)
@@ -354,7 +361,6 @@ class SubscriptionSettingsForm(forms.ModelForm):
 
     class Meta:
         model = SubscriptionSettings
-        fields = ['enable_notifications', 'member_joins', 'new_question', 'new_question_watched_tags', 'subscribed_questions']
 
 class UserPreferencesForm(forms.Form):
     sticky_sorts = forms.BooleanField(required=False, initial=False)

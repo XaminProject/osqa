@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-import json
 import logging
 
 from urllib import urlencode
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
+from django.utils import simplejson
 from django.utils.encoding import smart_unicode
 from django.utils.translation import ungettext, ugettext as _
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render_to_response
-
-from django.contrib import messages
 
 from forum.models import *
 from forum.utils.decorators import ajax_login_required
@@ -77,8 +75,8 @@ class CannotDoubleActionException(CommandException):
 
 @decorate.withfn(command)
 def vote_post(request, id, vote_type):
-    if not request.method == 'POST':
-        raise CommandException(_("Invalid request"))
+#    if not request.method == 'POST':
+#        raise CommandException(_("Invalid request"))
 
 
     post = get_object_or_404(Node, id=id).leaf
@@ -355,7 +353,7 @@ def accept_answer(request, id):
             """)
 
             # Notify the user with a message that an answer has been accepted
-            messages.info(request, msg)
+            request.user.message_set.create(message=msg)
 
             # Redirect URL should include additional get parameters that might have been attached
             redirect_url = answer.parent.get_absolute_url() + "?accepted_answer=true&%s" % smart_unicode(urlencode(request.GET))
@@ -547,7 +545,7 @@ def mark_tag(request, tag=None, **kwargs):#tagging system
                 pass
         else:
             ts.update(reason=reason)
-    return HttpResponse(json.dumps(''), mimetype="application/json")
+    return HttpResponse(simplejson.dumps(''), mimetype="application/json")
 
 def matching_tags(request):
     if len(request.GET['q']) == 0:
@@ -579,7 +577,7 @@ def related_questions(request):
         if can_rank and isinstance(can_rank, basestring):
             questions = questions.order_by(can_rank)
 
-        return HttpResponse(json.dumps(
+        return HttpResponse(simplejson.dumps(
                 [dict(title=q.title, url=q.get_absolute_url(), score=q.score, summary=q.summary)
                  for q in questions.filter_state(deleted=False)[0:10]]), mimetype="application/json")
     else:
@@ -640,4 +638,3 @@ def award_points(request, user_id, answer_id):
         AwardPointsAction(user=request.user, node=answer, extra=extra).save(data=dict(value=points, affected=awarded_user))
 
         return { 'message' : _("You have awarded %(awarded_user)s with %(points)d points") % {'awarded_user' : awarded_user, 'points' : points} }
-

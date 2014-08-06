@@ -1,0 +1,21 @@
+[Meta]
+users = 19
+tags = 18
+settings = 201
+overall = 453
+actions = 178
+awards = 13
+nodes = 24
+
+[Options]
+with-upfiles = True
+anon-data = False
+with-skins = False
+
+[DateAndAuthor]
+started = 2012-11-12 12:47:27
+finished = 2012-11-12 12:47:56
+author = 32
+site = http://ask.xamin.ir
+file-name = localhost-201211121247.zip
+

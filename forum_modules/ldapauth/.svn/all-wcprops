@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/!svn/ver/1241/osqa/trunk/forum_modules/ldapauth
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/!svn/ver/1241/osqa/trunk/forum_modules/ldapauth/__init__.py
+END
+authentication.py
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/!svn/ver/1241/osqa/trunk/forum_modules/ldapauth/authentication.py
+END
+settings.py
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svnroot/!svn/ver/1241/osqa/trunk/forum_modules/ldapauth/settings.py
+END

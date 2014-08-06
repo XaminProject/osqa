@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 import os.path
 from base import Setting, SettingSet
 from django.utils.translation import ugettext_lazy as _
@@ -83,5 +84,7 @@ label = _("Show author gravatar in comments"),
 help_text = _("Show the gravatar image of a comment author."),
 required=False))
 
-
-
+FORM_PRIMARY_TAGS = Setting('FORM_PRIMARY_TAGS', ("زمین-میزبان","اپلاینس","پشتیبانی","عمومی","طراحی","ترجمه","تست-توسعه","مستندسازی"), FORUM_SET, dict(
+label = _("you must at least select one of following tags:"), 
+help_text = _("required tags")
+))
