@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.append('/var/www/ask')
+sys.path.append('/path/to/files')
 sys.path.append('/usr/lib/python2.6/dist-packages/')
 # The first part of this module name should be identical to the directory name
 # of the OSQA source.  For instance, if the full path to OSQA is
