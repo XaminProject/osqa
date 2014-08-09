@@ -16,8 +16,8 @@ Requirements
 License
 =======
 This project is licensed under GPLv3
-(C) 2013 -2014
-All right reserved
-Powered by Iran Telecommunication Research Center
-Xamin Project Home Page : http://xamin.ir/
+(C) 2013 -2014.
+
+All right reserved.
+Powered by Iran Telecommunication Research Center.
 Xamin Project Home Page : http://xamin.ir/
