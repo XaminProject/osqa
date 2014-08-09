@@ -1,9 +1,10 @@
 This section of Xamin Project forked from OSQA project (open source Q&A system)
 
 Xamin Project Home Page : http://xamin.ir/
-Xamin Wiki : http://wiki.xamin.ir
 
-Powered by Iran Telecommunication Research Center
 
-(C) 2013 -2014
-All right reserved
+Django version: 1.3
+Python version: 2.6
+
+django modules needed:
+    South
