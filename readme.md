@@ -14,10 +14,6 @@ Requirements
  - Django 1.3 
  - Python south module
 
-<<<<<<< HEAD
-django modules needed:
-    South
-    compressor
 =======
 License
 =======
