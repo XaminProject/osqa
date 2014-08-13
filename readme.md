@@ -8,3 +8,4 @@ Python version: 2.6
 
 django modules needed:
     South
+    compressor
